@@ -6,21 +6,21 @@ terraform {
   }
 }
 
-variable "bridge_name"{
-  default = "virbr2"
+variable "bridge_name" {
+  default  = "virbr2"
   nullable = false
 }
 
 variable "ubuntu_cloud_image_location" {
-  type = string
-  default = "/v-machines/cloud-images/focal-server-cloudimg-amd64.img"
-  nullable = false
+  type        = string
+  default     = "/v-machines/cloud-images/focal-server-cloudimg-amd64.img"
+  nullable    = false
   description = "location of ubuntu cloud img file. Only tested with fossa (20.04). One can also use the HTTP directly if you don't want to download it first."
 }
 
 variable "kafka_vm_pool_location" {
   type     = string
-  default  = " /v-machines/kafka-pool"
+  default  = "/v-machines/kafka-pool"
   nullable = false
 }
 
@@ -59,7 +59,7 @@ resource "libvirt_pool" "kafka" {
 
 resource "libvirt_volume" "os_image_ubuntu" {
   name   = "os_image_ubuntu"
-  pool   = "default"
+  pool   = "kafka-pool"
   source = var.ubuntu_cloud_image_location
 }
 
